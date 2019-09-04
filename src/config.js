@@ -1,34 +1,35 @@
 const axios = require('axios').default;
 
-// if (process.env.DEBUG) {
-//     axios.interceptors.request.use(req => {
-//         console.log('------- REQUEST --------');
-//         console.log('url: ', req.url);
-//         console.log('method: ', req.method);
-//         console.log('headers: ', req.headers);
-//         console.log('data: ', req.data);
-//         console.log('------- REQUEST END--------\n');
+if (process.env.DEBUG) {
+    axios.interceptors.request.use(req => {
+        console.log('------- REQUEST --------');
+        console.log('url: ', req.url);
+        console.log('method: ', req.method);
+        console.log('headers: ', req.headers);
+        console.log('data: ', req.data);
+        console.log('------- REQUEST END--------\n');
 
-//         return req;
-//     });
+        return req;
+    });
 
-//     axios.interceptors.response.use(res => {
-//         console.log('------- RESPONSE --------');
-//         console.log('url: ', res.request.path);
-//         console.log('status: ', res.status);
-//         console.log('data: ', res.data);
-//         console.log('------- RESPONSE END--------\n');
+    axios.interceptors.response.use(res => {
+        console.log('------- RESPONSE --------');
+        console.log('url: ', res.request.path);
+        console.log('status: ', res.status);
+        console.log('data: ', res.data);
+        console.log('------- RESPONSE END--------\n');
 
-//         return res;
-//     }, err => {
-//         console.log(err.response);
+        return res;
+    }, err => {
+        console.log(err.response);
 
-//         return Promise.reject(err.response);
-//     });
-// }
+        return Promise.reject(err);
+    });
+}
 
 const availableRegistries = {
-    'dockerhub': 'https://registry-1.docker.io'
+    'dockerhub': 'https://registry-1.docker.io',
+    'aws': ''
 };
 
 
