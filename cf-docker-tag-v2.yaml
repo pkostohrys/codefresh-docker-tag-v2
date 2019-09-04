@@ -1,0 +1,95 @@
+kind: step-type
+version: '1.0'
+metadata:
+  name: codefresh-inc/pgp
+  isPublic: true
+  description: Ability to tag docker images using 'Docker Registry V2 API'
+  sources:
+    - >-
+      https://github.com/codefresh-io/steps/tree/master/graduated/codefresh-run
+  stage: graduated
+  maintainers:
+    - name: Pasha Kostohrys
+      email: pavel@codefresh.io
+  categories:
+    - utility
+  official: false
+  tags: []
+  icon:
+    type: svg
+    url: http://iconurl.com/03a9f4/256/awesome-docker.svg
+    background: "#ffffff"
+  examples:
+    - description: example-1
+      workflow:
+        version: '1.0'
+        steps:
+          tag_image:
+            title: Tag image within dockerhub registry
+            type: codefresh/cf-docker-tag-v2
+            arguments:
+              REGISTRY: "dockerhub",
+              USERNAME: "codefresh-user",
+              PASSWORD: "9B************",
+              IMAGE_NAME: "codefresh-user/target-image",
+              IMAGE_TAG: "staging",
+              NEW_TAG: "production"
+spec:
+  arguments: |-
+    {
+        "definitions": {},
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "additionalProperties": false,
+        "patterns": [],
+        "required": [
+            "REGISTRY",
+            "USERNAME",
+            "PASSWORD",
+            "IMAGE_NAME",
+            "NEW_TAG"
+        ],
+        "properties": {
+            "REGISTRY": {
+                "type": "string",
+                "description": "Docker registry that supports Docker Registry HTTP API V2",
+                "examples": ["dockerhub", "https://registry-1.docker.io"]
+            },
+            "USERNAME": {
+                "type": "string",
+                "description": "Username",
+                "examples": ["codefresh-user"]
+            },
+            "PASSWORD": {
+                "type": "string",
+                "description": "Password",
+                "examples": ["9B************"]
+            },
+            "IMAGE_NAME": {
+                "type": "string",
+                "description": "Target image name",
+                "examples": ["codefresh-user/target-image"]
+            },
+            "IMAGE_TAG": {
+                "type": "string",
+                "description": "Target image tag",
+                "examples": ["staging"]
+            },
+            "NEW_TAG": {
+                "type": "string",
+                "description": "New tag",
+                "examples": ["production"]
+            },
+        }
+    }
+  steps:
+    tag_image:
+      title: cf-docker-tag-v2
+      type: codefresh/cf-docker-tag-v2
+      arguments:
+        REGISTRY: ${{REGISTRY}},
+        USERNAME: ${{USERNAME}},
+        PASSWORD: ${{PASSWORD}},
+        IMAGE_NAME: ${{IMAGE_NAME}},
+        IMAGE_TAG: ${{IMAGE_TAG}},
+        NEW_TAG: ${{NEW_TAG}}

@@ -9,4 +9,4 @@ RUN yarn install --production
 
 COPY src /app/src
 
-CMD cd /app && ls && npm run start
+CMD ["node", "/app/src/index"]
